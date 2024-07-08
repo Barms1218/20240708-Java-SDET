@@ -1,52 +1,50 @@
-
-
+package Java.Day1.FourPillars;
 
 /**
  * ABSTRACTION
- *  -> a class that can have abstract methods
- * -> can NOT be initialized
- * -> uses a different keyword - extends
+ *      -> a class that can have abstract methods
+ *      -> can NOT be initialized
+ *      -> uses extends keyword
  */
 
-public abstract class Vehicle implements Driveable // Abstract classes are exempt from implementing interfaces
-{
+public abstract class Vehicle implements Driveable{
+
     private String type;
     private int numWheels;
+    
+    public Vehicle() {
+    }
 
-    // Constructors
-    public Vehicle(String type, int numWheels) 
-    {
+    public Vehicle(String type, int numWheels) {
         this.type = type;
         this.numWheels = numWheels;
     }
 
-    public Vehicle() {
-    }
-    
-    // Getters and Setters
-    public String getType() 
-    {
+    // getters and setters
+    public String getType() {
         return type;
     }
 
-    public void setType(String type) 
-    {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public int getNumWheels() 
-    {
+    public int getNumWheels() {
         return numWheels;
     }
 
-    public void setNumWheels(int numWheels) 
-    {
+    public void setNumWheels(int numWheels) {
 
-        if (numWheels >= 0) {
+        //only initialize the value if it is non-negative
+        if(numWheels >= 0) {
             this.numWheels = numWheels;
         }
+        
     }
 
-    public abstract void drive();
     public abstract void start();
+
+    // dont have to implement abstract methods from parents inside of an abstract class
+    ///public abstract void drive();
+    
 }

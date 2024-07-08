@@ -1,13 +1,17 @@
+package Java.Day1.FourPillars;
 
-
-/** 
+/**
  * ABSTRACTION
- * makes a class only show what other classes need to know
- * interfaces are %100 abstract
- *  - Every interface method is implicitly abstract
- * to use an interface you need to add implements keyword to a class declaration
+ *      -> only show what needs to be shown 
+ *      -> interfaces are 100% abstract
+ *          - every method is abstact implicitly
+ *      -> uses implements keyword 
+ * 
  */
-public interface Driveable 
-{
+
+public interface Driveable {
+
+    // doesn't have to be defined as abstract
     public void drive();
+    
 }

@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.1</version>
+		<version>3.2.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -41,7 +41,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-
+	<!-- Spring Boot Starter, but for tests -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -52,6 +52,15 @@
 	<build>
 		<plugins>
 			<plugin>
+			<!-- Allows maven to package your spring boot projects 
+				maven will package into a fat JAR file.
+				A fat JAR file includes everything needed to run your project
+				including all code, tools, and dependencies
+
+				If you pakcage as a WAR file, you don't need this plugin
+					in general you only package as a WAR when you have some 
+					existing server you would deploy your project to. 
+			-->
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>

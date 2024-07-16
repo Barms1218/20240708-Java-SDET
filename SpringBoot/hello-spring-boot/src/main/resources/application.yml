@@ -1,0 +1,28 @@
+# application.properties/.yml is a config file
+
+# Can be either file type but name MUST be application and in src/main/resources
+# In this file you can put properties your project uses
+# If your project changes environments these properties will stay the same
+
+# These settings are just for practice
+
+# Use this for yml NOT properties
+spring:
+  application:
+    name: hello-spring-boot # sets the name for the project
+    admin:
+      enabled: false # This is the default. Only change if you know what you're doing
+    config:
+      name: application # This is the default. Sets the name for config file. Only change if you're experienced
+    output:
+      ansi:
+        enabled: ALWAYS # Lets your terminal display colors
+server:
+  port: 8282 # Sets the project port number - Default is 8080
+
+#Use this for properties NOT yml
+
+# spring.application.name=hello-spring-boot
+# spring.application.admin.enabled=false
+# spring.config.name=application
+

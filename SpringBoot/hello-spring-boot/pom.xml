@@ -35,6 +35,12 @@
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 	<!-- Spring Boot Starter Dependency will provide the opinionated configurations -->
 	<!-- This is what starts the Spring Boot project -->
 		<dependency>

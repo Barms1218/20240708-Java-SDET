@@ -17,7 +17,7 @@ public class SingletonMain {
 
         System.out.println("Intance1 count: " + instance1.getCount());
         System.out.println("Intance2 count: " + instance2.getCount());
-        
+
         System.out.println(instance1);
         System.out.println(instance2);
     }

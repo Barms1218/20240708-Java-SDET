@@ -2,6 +2,7 @@ package Java.Day1.Collections;
 
 public class Animal {
     private String name;
+    private boolean isTrue;
 
     public Animal(String name) {
         this.name = name;

@@ -3,6 +3,10 @@ package Java.Day1.FourPillars;
 
 public class FourPillarsMain {
 
+    boolean b1 = false;
+    boolean b2 = false;
+
+ 
     //main is the starting point of your projects
     public static void main(String[] args) {
 
@@ -30,7 +34,6 @@ public class FourPillarsMain {
         System.out.println(segway.getNumWheels());
         segway.start();
         segway.drive();
-    
     }
 
 }

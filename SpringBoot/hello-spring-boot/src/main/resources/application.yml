@@ -12,11 +12,11 @@ spring:
     name: hello-spring-boot # sets the name for the project
     admin:
       enabled: false # This is the default. Only change if you know what you're doing
-    config:
-      name: application # This is the default. Sets the name for config file. Only change if you're experienced
-    output:
-      ansi:
-        enabled: ALWAYS # Lets your terminal display colors
+  config:
+    name: application # This is the default. Sets the name for config file. Only change if you're experienced
+  output:
+    ansi:
+      enabled: ALWAYS # Lets your terminal display colors
 server:
   port: 8282 # Sets the project port number - Default is 8080
 

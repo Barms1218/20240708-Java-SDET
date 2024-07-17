@@ -27,7 +27,7 @@ import com.skillstorm.hello_spring_boot.beans.Vehicle;
 @SpringBootApplication
 public class HelloSpringBootApplication implements CommandLineRunner {
 
-	@Autowired // Ask Spring to give us a bean
+	@Autowired // Ask Spring to give us a bean instead of asking app context
 	@Qualifier("Camaro") // Tells Spring which bean to give us
 	private Vehicle car3;
 
@@ -57,11 +57,15 @@ public class HelloSpringBootApplication implements CommandLineRunner {
 	 * 		Usually used to perform some setup for an application - like loading data
 	 * 
 	 * 		Also a functional interface - could be a lambda if desired
+	 * 
+	 * You no longer have to call context.getBean() - @AutoWired will do taht for you
 	 */
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("");
+		System.out.println(car3);
+		System.out.println("I'm driving my new Camaro!");
+		car3.drive();
 	}
 
 }

@@ -12,6 +12,7 @@ public class Car implements Vehicle {
 
     public Car(Engine engine) {
         this.engine = engine;
+        engine.run();
         System.out.println("*** Constructor: Car(Engine engine) ***");
     }
 

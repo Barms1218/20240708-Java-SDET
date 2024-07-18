@@ -1,11 +1,11 @@
 package com.skillstorm.spring_mvc.controllers;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skillstorm.spring_mvc.services.UserService;
+import com.skillstorm.spring_mvc.dtos.UserDto;
 import com.skillstorm.spring_mvc.models.User;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 /*
  * 
@@ -59,6 +61,11 @@ public class UserController {
         return service.findallUsers();
     }
 
+    @GetMapping("/dto")
+    public List<UserDto> findAllUsersDto() {
+        return service.findAllUsersDto();
+    }
+
     /*
      * @RequestParam finds the data for the parameter in the url path
      * 
@@ -66,7 +73,7 @@ public class UserController {
      */
     @GetMapping("/first_name")
     public List<User> findByFirstName(@RequestParam String firstName) {
-        return service.findByFirstName();
+        return service.findByFirstName(firstName);
     }
 
     @GetMapping("/user/{id}")
@@ -88,4 +95,22 @@ public class UserController {
 
         return new ResponseEntity<User>(createdUser, HttpStatus.CREATED);
     }
+
+    /*
+     * PutMapping - used to update data
+     */
+    @PutMapping("/user/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody User user) {
+        User createdUser = service.updateUser(id, user);
+
+        return new ResponseEntity<>(createdUser, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/user/")
+    public ResponseEntity<User> deleteUser(@PathVariable long id, @RequestBody User user) {
+        service.deleteUser(id, user);
+
+        return new ResponseEntity<User>(HttpStatus.NO_CONTENT); // setse the status code to 204 - No Content
+    }
+
 }

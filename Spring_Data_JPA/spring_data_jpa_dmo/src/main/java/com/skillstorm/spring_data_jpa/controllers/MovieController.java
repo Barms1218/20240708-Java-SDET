@@ -27,52 +27,43 @@ public class MovieController {
 
     private MovieRepository repo;
 
-    // Use dependency injection to get an instance of the MovieRepository
-    @Autowired // Not required when there is only one constructor
+    // use dependency injection to get an instance of the MovieRepository
+    @Autowired // not required when there is only one constructor
     public MovieController(MovieRepository repo) {
         this.repo = repo;
     }
 
     @GetMapping("/hello")
-    public String HelloWorld() {
-        return "Hello World!";
+    public String helloWorld() {
+        return "Hello";
     }
 
-    // Get all movies
-    @GetMapping("/movies")
-    public Iterable<Movie> getAllMovies(@RequestParam String param) {
+    @GetMapping
+    public Iterable<Movie> findAll() {
         return repo.findAll();
     }
 
-    // Get movies by ID
-    @GetMapping()
-    public ResponseEntity<Movie> getMovieByID(@PathVariable int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Movie> findById(@PathVariable int id) {
         Optional<Movie> movie = repo.findById(id);
-        if (movie.isPresent()) {
+        if (movie.isPresent())
             return ResponseEntity.ok(movie.get());
-        } else {
+        else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
-    // Post a new movie
-    @PostMapping()
-    public ResponseEntity<Movie> createMovie(@PathVariable int id, @RequestBody Movie movie) {
-
-        return new ResponseEntity<>(movie, HttpStatus.CREATED);
+    @PostMapping
+    public Movie create(@RequestBody Movie movie) {
+        return null;
     }
 
-    // Put mapping
     @PutMapping("/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie movie) {
-
-        return new ResponseEntity<Movie>(HttpStatus.OK);
+    public String putMethodName(@PathVariable int id, @RequestBody Movie entity) {
+        return null;
     }
 
-    // Delete mapping
     @DeleteMapping("/{id}")
-    public ResponseEntity<Movie> deleteMovie(@PathVariable int id, @RequestBody Movie movie) {
+    public void deleteById(@PathVariable int id) {
 
-        return new ResponseEntity<Movie>(HttpStatus.NO_CONTENT);
     }
 }

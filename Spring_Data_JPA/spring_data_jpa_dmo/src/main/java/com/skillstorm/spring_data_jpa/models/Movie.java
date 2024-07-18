@@ -1,10 +1,14 @@
 package com.skillstorm.spring_data_jpa.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -14,7 +18,7 @@ import jakarta.validation.constraints.Min;
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // strategies : IDENTITY not AUTO
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // strategies: IDENTITY or AUTO
     private int id;
 
     @Column(length = 50)
@@ -24,11 +28,17 @@ public class Movie {
     @Max(value = 10)
     private int rating;
 
-    public Movie(int id, String movieTitle, @Min(0) @Max(10) int rating) {
-        this.id = id;
-        this.movieTitle = movieTitle;
-        this.rating = rating;
-    }
+    // TODO3 Many-to-one mapping
+    // Could not write JSON: Document nesting depth (1001) exceeds the maximum
+    // allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
+    @ManyToOne
+    @JoinColumn(name = "director_id")
+    @JsonBackReference // prevent circular reference one of three ways: (jsonignore,
+                       // jsonmanagemedreferenece, jsonproperty always as id)
+    private Director director;
+
+    // do not do
+    // private int directorId;
 
     public int getId() {
         return id;
@@ -54,6 +64,19 @@ public class Movie {
         this.rating = rating;
     }
 
-    // Don't add the foreign id column;
+    public Director getDirector() {
+        return director;
+    }
+
+    public void setDirector(Director director) {
+        this.director = director;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie [id=" + id + ", movieTitle=" + movieTitle + ", rating=" + rating + ", director=" + director + "]";
+    }
+
+    // don't add the foreign id column
 
 }

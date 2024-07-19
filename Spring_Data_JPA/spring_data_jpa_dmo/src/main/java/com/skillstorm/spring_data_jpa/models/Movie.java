@@ -1,6 +1,8 @@
 package com.skillstorm.spring_data_jpa.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,7 +16,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
 @Entity
-@Table(name = "movies") // Optional if name of database matches name of class - CASE SENSITIVE
+@Table(name = "movies") // optional annotation if name of db table matches class name
 public class Movie {
 
     @Id
@@ -28,13 +30,26 @@ public class Movie {
     @Max(value = 10)
     private int rating;
 
-    // TODO3 Many-to-one mapping
-    // Could not write JSON: Document nesting depth (1001) exceeds the maximum
-    // allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
+    /* 
+    // @Many-to-one mapping
+    Circular reference:
+    
+    Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
+    
+    Solution:
+    
+    Mark the list @JsonIgnore
+    or
+    Mark the list @JsonBackReference
+    or
+    Mark the Direcgtor class as having a customized way for Jackson to seralize it and add
+     @JsonIdentityReference(alwaysAsId = true)                 
+    
+    
+    */
     @ManyToOne
     @JoinColumn(name = "director_id")
-    @JsonBackReference // prevent circular reference one of three ways: (jsonignore,
-                       // jsonmanagemedreferenece, jsonproperty always as id)
+    @JsonManagedReference
     private Director director;
 
     // do not do
@@ -73,8 +88,13 @@ public class Movie {
     }
 
     @Override
+
     public String toString() {
-        return "Movie [id=" + id + ", movieTitle=" + movieTitle + ", rating=" + rating + ", director=" + director + "]";
+
+        return "Movie [id=" + id + ", movieTitle=" + movieTitle + ", rating=" + rating + ", director "
+                + (director == null ? null : director.getFirstName()) + " "
+                + (director == null ? null : director.getLastName()) + "]";
+
     }
 
     // don't add the foreign id column

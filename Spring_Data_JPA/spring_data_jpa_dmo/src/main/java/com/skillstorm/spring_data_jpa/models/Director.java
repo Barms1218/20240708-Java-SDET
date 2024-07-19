@@ -2,7 +2,11 @@ package com.skillstorm.spring_data_jpa.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,20 +18,38 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "directors")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Director {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    // Create an attribute named firstName with a length of 50
     @Column(length = 50)
     private String firstName;
 
     @Column(length = 50)
     private String lastName;
 
+    /*
+    *     @OneToMany(mappedBy = "director", targetEntity = Movie.class) // targetEntity is optional because Spring Data
+                                                              // implies this from field list type
+    
+    
+        Circular Reference Solutions:
+    
+    1. @JsonIgnore List<Movie> movies; in Director class
+    - one side of the relationship so it is not seralized
+    
+    2. @JsonManagedReference
+    @JsonBackReference
+    
+    3. @JsonIdentityReference(alwaysAsId = true) Director director; in Movies class
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id") class Director { ... }
+    */
     @OneToMany(mappedBy = "director", targetEntity = Movie.class) // targetEntity is optional because Spring Data
                                                                   // implies this from field list type
-    @JsonManagedReference
+    // @JsonBackReference
     List<Movie> movies;
 
     public Director() {

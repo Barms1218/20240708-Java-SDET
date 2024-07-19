@@ -1,7 +1,5 @@
 package com.skillstorm.spring_data_jpa.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -49,7 +47,7 @@ public class Movie {
     */
     @ManyToOne
     @JoinColumn(name = "director_id")
-    @JsonManagedReference
+    // @JsonManagedReference
     private Director director;
 
     // do not do

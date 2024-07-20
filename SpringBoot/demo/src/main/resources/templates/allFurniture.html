@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <title>Furniture World</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <div th:each="furniture : ${allFurniture}">
+      <p th:text="${furniture.id}"></p>
+      <p th:text="${furniture.type}"></p>
+      <p th:text="${furniture.size}"></p>
+    </div>
+  </body>
+</html>

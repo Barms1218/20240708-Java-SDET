@@ -17,6 +17,6 @@ public class FurnitureController {
     @RequestMapping(value = "/furniture", method = RequestMethod.GET)
     public String getFurniture(Model model) {
         model.addAttribute("allFurniture", furnitureService.findAllFurniture());
-        return "allFurniture"; // Adjusted path to match the location in templates folder
+        return "allFurniture";
     }
 }
